@@ -1,0 +1,36 @@
+﻿@page
+@model DeleteAccModel
+@{
+    ViewData["Title"] = "Paskyros naikinimas";
+}
+@{
+   Layout = "_LayoutClient";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Paskyros naikinimas</h1>
+    <h3>Jusu paskyros duomenys</h3>
+    <center>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-4">
+                </div>
+                <div class="col-sm-4">
+                    Jūsų prisijungimo vardas
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                </div>
+                <div class="col-sm-4">
+                    Nesumokėtų sąskaitų: 0
+                </div>
+            </div>
+            <br />
+            Ar tikrai norite panaikinti paskyrą?
+            <input type="button" class="btn btn-danger" value="Taip" />
+            <input type="button" class="btn btn-light" value="Ne" />
+        </div>
+    </center>
+</div>

@@ -1,0 +1,34 @@
+﻿@page
+@model ReserveModel
+@{
+    ViewData["Title"] = "Kambario rezervacija";
+}
+@{
+   Layout = "_LayoutClient";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Kambario rezervacijos forma</h1>
+    <center>
+        <form method="post" style="width:50%;">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label for="room">Kambario numeris:</label>
+                        <input type="number" name="room" />
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="datefrom">Nuo:</label>
+                        <input type="date" name="datefrom" />
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="datetill">Iki:</label>
+                        <input type="date" name="datetill" />
+                    </div>
+                </div>
+                <input type="submit" value="Rezervuoti" name="submit" />
+            </div>
+        </form>
+    </center>
+</div>

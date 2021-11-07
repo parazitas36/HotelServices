@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace HotelServices.Pages
 {
-    public class ClientindexModel : PageModel
+    public class DeleteAccModel : PageModel
     {
-        private readonly ILogger<ClientindexModel> _logger;
+        private readonly ILogger<DeleteAccModel> _logger;
 
-        public ClientindexModel(ILogger<ClientindexModel> logger)
+        public DeleteAccModel(ILogger<DeleteAccModel> logger)
         {
             _logger = logger;
         }
