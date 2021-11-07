@@ -21,5 +21,20 @@ namespace HotelServices.Pages
         {
 
         }
+        public void OnPost(string email, string password)
+        {
+            Console.WriteLine(email);
+            Console.WriteLine(password);
+            if (email.ToLower().Contains("klientas")) {
+                Response.Redirect("/index");
+            }else if (email.ToLower().Contains("darbutojas"))
+            {
+                Response.Redirect("/workerindex");
+            }
+            else if (email.ToLower().Contains("rdarbuotojas"))
+            {
+                Response.Redirect("/registrationworkerindex");
+            }
+        }
     }
 }
