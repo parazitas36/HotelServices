@@ -1,0 +1,32 @@
+﻿@page
+@model WorkerlistModel
+@{
+    ViewData["Title"] = "Darbuotojų sąrašas";
+}
+@{
+   Layout = "_Layoutadmin";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Darbuotojų sąrašas</h1>
+    <center>
+        <table class="table-striped">
+            <tr>
+                <th>Vardas</th>
+                <th>Pavardė</th>
+                <th>Išregistravimas</th>
+            </tr>
+            <tr>
+                <td>Vardenis</td>
+                <td>Pavardenis</td>
+                <td><a href="Deleteworker"><input type="button" value="Išregistruoti" /></a></td>
+            </tr>
+            <tr>
+                <td>Zigmas</td>
+                <td>Zigmauskas</td>
+                <td><a href="Deleteworker"><input type="button" value="Išregistruoti" /></a></td>
+            </tr>
+        </table>
+    </center>
+</div>
