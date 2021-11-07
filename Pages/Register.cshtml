@@ -1,0 +1,38 @@
+﻿@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Prisjungimo langas";
+}
+@{
+    Layout = "_Layout";
+}
+<div class="text-center">
+    <h1 class="display-4">Prisijungimo forma</h1>
+    <center>
+        <div style="border-style:double; width:50%; margin-top:10%; background-color: whitesmoke">
+            <h2 style="font-weight:normal">Įveskite registracijos duomenis</h2>
+            <form style="margin-left:35%;" method="post">
+                <div class="form-group">
+                    <div class="row">
+                        <input placeholder="El.Paštas" type="email" name="email" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <input placeholder="Slaptažodis" type="password" name="password" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <input placeholder="Pakartoti slapažodį" type="password" name="rpassword" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row" style="margin-left:10%">
+                        <input type="submit" name="submit" value="Registruotis" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </center>
+</div>
