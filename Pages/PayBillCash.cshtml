@@ -1,0 +1,48 @@
+﻿@page
+@model PayBillCashModel
+@{
+    ViewData["Title"] = "Rezervacijos atšaukimas";
+}
+@{
+   Layout = "_LayoutRegistrationWorkers";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Sąskaitos apmokėjimas</h1>
+    <h3>Sąsakitos duomenys</h3>
+    <center>
+        <div class="col-sm-4" style="vertical-align:middle; text-align: center;">
+
+            <table>
+                <tr>
+                    <th>Kliento vardas:</th>
+                    <th>Jonas:</th>
+                </tr>
+                <tr>
+                    <th>Kliento pavardė:</th>
+                    <th>Jonaitis:</th>
+                </tr>
+                <tr>
+                    <th>Sąskaitos Nr.</th>
+                    <th>1</th>
+                </tr>
+                <tr>
+                    <th>Sudarymo data</th>
+                    <th>2021-11-05</th>
+                </tr>
+                <tr>
+                    <th>Suma</th>
+                    <th>105.50</th>
+                </tr>
+            </table>
+            <b>
+                Įveskite gautą sumą
+            </b>
+            <input type="text" />
+
+        </div>
+    </center>
+    <input type="button" class="btn-success" value="Apmokėti" />
+    <input type="button" class="btn-danger" value="Atšaukti" />
+</div>
