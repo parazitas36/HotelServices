@@ -8,4 +8,16 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Pages\AprroveReservation.cshtml">
+      <CopyToOutputDirectory></CopyToOutputDirectory>
+    </Content>
+    <Content Update="Pages\Cancelreservation.cshtml">
+      <CopyToOutputDirectory></CopyToOutputDirectory>
+    </Content>
+    <Content Update="Pages\Deleteacc.cshtml">
+      <CopyToOutputDirectory></CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
