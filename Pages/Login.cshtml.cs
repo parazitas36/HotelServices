@@ -32,7 +32,7 @@ namespace HotelServices.Pages
             {
                 Response.Redirect("/registerworkerindex");
             }
-            else if (email.ToLower().Contains("darbutojas"))
+            else if (email.ToLower().Contains("darbuotojas"))
             {
                 Response.Redirect("/workerindex");
             }
