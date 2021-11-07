@@ -9,6 +9,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Pages\Cancelreservation.cshtml">
+      <CopyToOutputDirectory></CopyToOutputDirectory>
+    </Content>
     <Content Update="Pages\Deleteacc.cshtml">
       <CopyToOutputDirectory></CopyToOutputDirectory>
     </Content>
