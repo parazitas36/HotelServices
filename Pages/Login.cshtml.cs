@@ -36,7 +36,11 @@ namespace HotelServices.Pages
             {
                 Response.Redirect("/workerindex");
             }
-           
+            else if (email.ToLower().Contains("admin"))
+            {
+                Response.Redirect("/adminindex");
+            }
+
         }
     }
 }
