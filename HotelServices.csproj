@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Pages\PayBillCash.cshtml">
+      <CopyToOutputDirectory></CopyToOutputDirectory>
+    </Content>
     <Content Update="Pages\AprroveReservation.cshtml">
       <CopyToOutputDirectory></CopyToOutputDirectory>
     </Content>
