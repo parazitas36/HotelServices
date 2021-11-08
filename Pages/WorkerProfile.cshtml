@@ -1,0 +1,35 @@
+﻿@page
+@model WorkerProfileModel
+@{
+    ViewData["Title"] = "Darbuotojo profilis";
+}
+@{
+    Layout = "_LayoutWorker";
+}
+<div class="text-center">
+    <h1 class="display-4">Profilis</h1>
+    <center>
+        <div style="border-style:double; width:50%; margin-top:10%; background-color: whitesmoke">
+          
+            <form style="margin-left:35%;" method="post">
+
+                <div class="row">
+                    <div class="col-sm-4">
+                    </div>
+                    <div class="col-sm-4">
+                        Jūsų prisijungimo vardas
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                    </div>
+                    <div class="col-sm-4">
+                        Email
+                    </div>
+                </div>
+                <a href="WorkerProfileEdit"><input type="button" value="Redaguoti" /></a>
+                <br />
+            </form>
+        </div>
+    </center>
+</div>
