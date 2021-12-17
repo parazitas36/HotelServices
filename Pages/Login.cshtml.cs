@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HotelServices.Controllers;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -11,10 +14,13 @@ namespace HotelServices.Pages
     public class LoginModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
+        private readonly IConfiguration _config;
 
-        public LoginModel(ILogger<IndexModel> logger)
+
+        public LoginModel(IConfiguration config, ILogger<IndexModel> logger)
         {
             _logger = logger;
+            _config = config;
         }
 
         public void OnGet()
@@ -25,6 +31,9 @@ namespace HotelServices.Pages
         {
             Console.WriteLine(email);
             Console.WriteLine(password);
+            DBController dbc = new DBController(_config);
+            SqlConnection conn = dbc.ConnectToDB();
+            Console.WriteLine(conn.State);
             if (email.ToLower().Contains("klientas")) {
                 Response.Redirect("/clients/index");
             }
@@ -38,7 +47,7 @@ namespace HotelServices.Pages
             }
             else if (email.ToLower().Contains("admin"))
             {
-                Response.Redirect("/admin.index");
+                Response.Redirect("/admin/index");
             }
 
         }
