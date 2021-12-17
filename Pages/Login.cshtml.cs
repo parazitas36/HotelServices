@@ -26,19 +26,19 @@ namespace HotelServices.Pages
             Console.WriteLine(email);
             Console.WriteLine(password);
             if (email.ToLower().Contains("klientas")) {
-                Response.Redirect("/clientindex");
+                Response.Redirect("/clients/index");
             }
             else if (email.ToLower().Contains("rdarbuotojas"))
             {
-                Response.Redirect("/registerworkerindex");
+                Response.Redirect("/registration/index");
             }
             else if (email.ToLower().Contains("darbuotojas"))
             {
-                Response.Redirect("/workerindex");
+                Response.Redirect("/workers/index");
             }
             else if (email.ToLower().Contains("admin"))
             {
-                Response.Redirect("/adminindex");
+                Response.Redirect("/admin.index");
             }
 
         }
