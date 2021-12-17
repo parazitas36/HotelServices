@@ -9,16 +9,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Pages\PayBillCash.cshtml">
+    <Content Update="Pages\Registration\PayBillCash.cshtml">
       <CopyToOutputDirectory></CopyToOutputDirectory>
     </Content>
-    <Content Update="Pages\AprroveReservation.cshtml">
+    <Content Update="Pages\Registration\ApproveReservation.cshtml">
       <CopyToOutputDirectory></CopyToOutputDirectory>
     </Content>
-    <Content Update="Pages\Cancelreservation.cshtml">
+    <Content Update="Pages\Clients\Cancelreservation.cshtml">
       <CopyToOutputDirectory></CopyToOutputDirectory>
     </Content>
-    <Content Update="Pages\Deleteacc.cshtml">
+    <Content Update="Pages\Clients\Deleteacc.cshtml">
       <CopyToOutputDirectory></CopyToOutputDirectory>
     </Content>
   </ItemGroup>
