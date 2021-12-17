@@ -31,19 +31,19 @@ namespace HotelServices.Pages
         {
 
         }
-        public void OnPost(string email, string password)
+        public void OnPost(string username, string password)
         {
-            Console.WriteLine(email);
+            Console.WriteLine(username);
             Console.WriteLine(password);
 
             // Paima id ir role, jei toks user yra
             string query = @"
             SELECT u.id_Naudotojas as id, (SELECT r.role FROM roles r WHERE Id = u.fk_role) as role 
             FROM Naudotojas u 
-            WHERE u.el_pastas = @email AND u.slaptazodis = @psw; 
+            WHERE u.prisijungimo_vardas = @username AND u.slaptazodis = @psw; 
             ";
             SqlCommand cmd = new SqlCommand(query, dbc);
-            cmd.Parameters.AddWithValue("@email", email);
+            cmd.Parameters.AddWithValue("@username", username);
             cmd.Parameters.AddWithValue("@psw", password);
             SqlDataReader reader = cmd.ExecuteReader();
 
@@ -56,6 +56,7 @@ namespace HotelServices.Pages
             string? role = (string)results[1];
             reader.Close();
 
+            // Jei prisijunge klientas
             if(role == "client")
             {
                 query = @"
@@ -83,21 +84,7 @@ namespace HotelServices.Pages
                 reader.Close();
             }
 
-            if (email.ToLower().Contains("klientas")) {
-                Response.Redirect("/clients/index");
-            }
-            else if (email.ToLower().Contains("rdarbuotojas"))
-            {
-                Response.Redirect("/registration/index");
-            }
-            else if (email.ToLower().Contains("darbuotojas"))
-            {
-                Response.Redirect("/workers/index");
-            }
-            else if (email.ToLower().Contains("admin"))
-            {
-                Response.Redirect("/admin/index");
-            }
+      
 
         }
     }
