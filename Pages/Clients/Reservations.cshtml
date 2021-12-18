@@ -7,39 +7,46 @@
    Layout = "_LayoutClient";
 }
 
+@{ 
+    Model.GetReservations();
+}
 
 <div class="text-center">
     <h1 class="display-4">Rezervacijos</h1>
     <center>
-    <table class="table-striped">
-        <tr>
-            <th>Nr.</th>
-            <th>Kambario Nr.</th>
-            <th>Nuo</th>
-            <th>Iki</th>
-            <th>Rezervacios būsena</th>
-            <th>Apmokėta</th>
-            <th>Atšaukti rezervaciją</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>100</td>
-            <td>2021-11-20</td>
-            <td>2021-11-27</td>
-            <td>Rezervuota</td>
-            <td>Ne</td>
-            <td><a href="cancelreservation"><input type="button" value="Atšaukti"/></a></td>
-        </tr>
+        <table class="table-striped" style="width:80%; justify-content:center; text-align:center;">
+            <thead>
+                <tr>
+                    <th>Nr.</th>
+                    <th>Kambario Nr.</th>
+                    <th>Nuo</th>
+                    <th>Iki</th>
+                    <th>Rezervacios būsena</th>
+                    <th>Atšaukti rezervaciją</th>
+                </tr>
+            </thead>
+            <tbody>
 
-        <tr>
-            <td>2</td>
-            <td>200</td>
-            <td>2021-11-01</td>
-            <td>2021-11-05</td>
-            <td>Rezervuota</td>
-            <td>Taip</td>
-            <td><a href="cancelreservation"><input type="button" value="Atšaukti" /></a></td>
-        </tr>
-    </table>
+                @{
+                    if (Model.reservations.Count == 0)
+                    {
+                        <tr><td colspan="5">Neturite rezervacijų</td></tr>
+                    }
+                }
+                @{
+                    for (int i = 0; i < Model.reservations.Count; i++)
+                    {
+                        <tr>
+                            <td>@Model.reservations[i].ID</td>
+                            <td>@Model.reservations[i].RoomNumber</td>
+                            <td>@Model.reservations[i].Starts.ToString("yyyy/MM/dd")</td>
+                            <td>@Model.reservations[i].Ends.ToString("yyyy/MM/dd")</td>
+                            <td>@Model.reservations[i].Status</td>
+                            <td><a href="/Cancelreservation"><input type="button" value="Atšaukti" /></a></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
     </center>
 </div>

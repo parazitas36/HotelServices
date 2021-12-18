@@ -17,6 +17,7 @@ namespace HotelServices.Pages
         private readonly ILogger<IndexModel> _logger;
         private readonly IConfiguration _config;
         private SqlConnection dbc;
+        public string ERROR = "";
 
         public RegisterModel(ILogger<IndexModel> logger, IConfiguration config)
         {
@@ -34,6 +35,7 @@ namespace HotelServices.Pages
         public void OnPost(string username, string email, string password, string rpassword, 
             string name, string surname, string phone, DateTime birth)
         {
+            ERROR = "";
             // Grazina klaida, jei slaptazodziai nesutampa
             if(password != rpassword)
             {
@@ -53,7 +55,7 @@ namespace HotelServices.Pages
             SqlDataReader reader = cmd.ExecuteReader();
 
             // Grazina klaida, jei toks egzistuoja
-            if (reader.HasRows) { Console.WriteLine("This username or email is already in use."); return; }
+            if (reader.HasRows) { ERROR  = "Toks prisijungimo vardas arba el.paštas jau yra naudojamas."; return; }
             reader.Close();
 
             // Sukuria paskyra ir grazina paskyros id
