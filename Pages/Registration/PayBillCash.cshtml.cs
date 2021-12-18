@@ -21,5 +21,9 @@ namespace HotelServices.Pages
         {
 
         }
+        public void OnPostPay()
+        {
+
+        }
     }
 }

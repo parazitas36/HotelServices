@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "PayBillCash"
 @model PayBillCashModel
 @{
     ViewData["Title"] = "Rezervacijos atšaukimas";
@@ -12,37 +12,51 @@
     <h1 class="display-4">Sąskaitos apmokėjimas</h1>
     <h3>Sąsakitos duomenys</h3>
     <center>
-        <div class="col-sm-4" style="vertical-align:middle; text-align: center;">
-
+        <div class="col-sm-4" style="vertical-align:middle;">
             <table>
                 <tr>
                     <th>Kliento vardas:</th>
-                    <th>Jonas:</th>
+                    <th></th>
+                    <td>Jonas:</td>
                 </tr>
                 <tr>
                     <th>Kliento pavardė:</th>
-                    <th>Jonaitis:</th>
+                    <th></th>
+                    <td>Jonaitis:</td>
                 </tr>
                 <tr>
                     <th>Sąskaitos Nr.</th>
-                    <th>1</th>
+                    <th></th>
+                    <td>1</td>
                 </tr>
                 <tr>
                     <th>Sudarymo data</th>
-                    <th>2021-11-05</th>
+                    <td>2021-11-05</td>
                 </tr>
                 <tr>
                     <th>Suma</th>
-                    <th>105.50</th>
+                    <th></th>
+                    <td>105.50</td>
                 </tr>
             </table>
+            <br />
             <b>
                 Įveskite gautą sumą
             </b>
             <input type="text" />
 
         </div>
+        <table>
+            <tr>
+                <td>
+                    <form asp-page-handler="Pay">
+                        <button onclick="post" class="btn btn-success">Apmokėti</button>
+                    </form>
+                </td>
+                <td>
+                    <a asp-page="RegBillsindex"><input type="submit" class="btn btn-danger" value="Atšaukti" /></a>
+                </td>
+            </tr>
+        </table>
     </center>
-    <input type="button" class="btn-success" value="Apmokėti" />
-    <input type="button" class="btn-danger" value="Atšaukti" />
 </div>

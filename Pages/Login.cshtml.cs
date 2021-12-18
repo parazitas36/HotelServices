@@ -32,7 +32,7 @@ namespace HotelServices.Pages
 
         }
 
-        public void OnPost(string username, string password)
+        public IActionResult OnPost(string username, string password)
         {
             Console.WriteLine(username);
             Console.WriteLine(password);
@@ -49,7 +49,7 @@ namespace HotelServices.Pages
             SqlDataReader reader = cmd.ExecuteReader();
 
             // Grazina error, jei tokio nerado
-            if (!reader.HasRows) { Console.WriteLine("Error login..."); return; }
+            if (!reader.HasRows) { Console.WriteLine("Error login..."); return Redirect("/index");}
 
             reader.Read();
             IDataRecord results = (IDataRecord)reader;
@@ -83,9 +83,43 @@ namespace HotelServices.Pages
                 );
                 Console.WriteLine(client.Name);
                 reader.Close();
+                Response.Cookies.Append("role", "client");
+                return Redirect("/clients/index");
             }
+            //jei prisijunge registraturos darbuotojas
+            if (role == "rworker")
+            {
+                query = @"
+                SELECT *
+                FROM Registraturos_darbuotojas
+                WHERE id_Naudotojas = @id;
+                ";
+                cmd = new SqlCommand(query, dbc);
+                cmd.Parameters.AddWithValue("@id", id);
+                reader = cmd.ExecuteReader();
+                reader.Read();
+                IDataRecord clientData = (IDataRecord)reader;
 
+                Console.WriteLine("Client logged in.");
+                RDarbuotojas client = new RDarbuotojas
+                (
+                    (int)id,
+                    role,
+                    (string)clientData[0],
+                    (string)clientData[1],
+                    (DateTime)clientData[2]
+                );
+                Console.WriteLine(client);
+                reader.Close();
+
+                //sukuria cookie uz "role" kablelio galima rasyti ir nehardcodintas reiksmes pvz jwt tokena
+
+                Response.Cookies.Append("role", "rworker");
+                return Redirect("/registration/index");
+                return Redirect("/registration/index");
+            }
             dbc.Close();
+            return Redirect("/index");
         }
     }
 }
