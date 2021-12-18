@@ -85,7 +85,7 @@ namespace HotelServices.Pages
                 reader.Close();
             }
 
-
+            dbc.Close();
         }
     }
 }
