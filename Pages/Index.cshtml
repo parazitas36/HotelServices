@@ -4,6 +4,21 @@
     ViewData["Title"] = "Pagrindinis langas";
 }
 
+
+
+@switch(Request.Cookies["role"])
+{
+    case "rworker":
+        Response.Redirect("/Registration");
+        break;
+    case "worker":
+        Response.Redirect("/Workers");
+        break;
+    case "client":
+        Response.Redirect("/Clients");
+        break;
+}
+
 <div class="text-center">
     <h1 class="display-4">Pagrindinis langas</h1>
 </div>

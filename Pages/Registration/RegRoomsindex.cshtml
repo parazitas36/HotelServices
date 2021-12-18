@@ -1,4 +1,4 @@
-﻿@page "/roomsIndex"
+﻿@page "RegRoomsindex"
 @model RegRoomsindexModel
 @{
     ViewData["Title"] = "Pagrindinis langas";
@@ -19,18 +19,18 @@
             <tr>
                 <td>100</td>
                 <td>Užimtas</td>
-                <td><a href="changeroomstate"><input type="button" value="Keisti Būseną" /></a></td>
+                <td><a asp-page="Changeroomstate"><input type="button" value="Keisti Būseną" /></a></td>
             </tr>
 
             <tr>
                 <td>200</td>
                 <td>Laisvas</td>
-                <td><a href="changeroomstate"><input type="button" value="Keisti Būseną" /></a></td>
+                <td><a asp-page="Changeroomstate"><input type="button" value="Keisti Būseną" /></a></td>
             </tr>
             <tr>
                 <td>200</td>
                 <td>Tvarkomas</td>
-                <td><a href="changeroomstate"><input type="button" value="Keisti Būseną" /></a></td>
+                <td><a asp-page="Changeroomstate"><input type="button" value="Keisti Būseną" /></a></td>
             </tr>
         </table>
     </center>

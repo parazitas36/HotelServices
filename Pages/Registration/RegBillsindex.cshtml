@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "RegBillsindex"
 @model RegBillsindexModel
 @{
     ViewData["Title"] = "Pagrindinis langas";
@@ -13,28 +13,28 @@
     <center>
         <table class="table-striped">
             <tr>
-                <th>Sąskaitos Nr.</th>
-                <th>Apmokėjimo data</th>
-                <th>Sudarymo data</th>
-                <th>Suma</th>
-                <th>Būsena</th>
+                <th>Sąskaitos Nr.  </th>
+                <th>Apmokėjimo data  </th>
+                <th>Sudarymo data  </th>
+                <th>Suma  </th>
+                <th>Būsena  </th>
             </tr>
             <tr>
-                <td>1</td>
-                <td>2021-11-28</td>
-                <td>2021-11-27</td>
-                <td>150.50</td>
-                <td>Apmokėta</td>
-                <td><a href="paybillcash"><input type="button" value="Apmokėti" /></a></td>
+                <td>  1</td>
+                <td>  2021-11-28</td>
+                <td>  2021-11-27</td>
+                <td>  150.50</td>
+                <td>  Apmokėta</td>
+                <td><a asp-page="PayBillCash"><input type="button" class="btn btn-primary" value="Apmokėti" /></a></td>
             </tr>
 
             <tr>
-                <td>2</td>
-                <td>---- -- --</td>
-                <td>2021-11-04</td>
-                <td>250.20</td>
-                <td>Neapmokėta</td>
-                <td><a href="paybillcash"><input type="button" value="Apmokėti" /></a></td>
+                <td>  2</td>
+                <td>  ---- -- --</td>
+                <td>  2021-11-04</td>
+                <td>  250.20</td>
+                <td>  Neapmokėta</td>
+                <td><a asp-page="PayBillCash"><input type="button" class="btn btn-primary" value="Apmokėti" /></a></td>
             </tr>
         </table>
     </center>

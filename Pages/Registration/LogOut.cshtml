@@ -1,0 +1,12 @@
+﻿@page   "LogOut"
+@model LogOutModel
+@{
+    ViewData["Title"] = "Atsijungti";
+}
+<div class="text-center">
+    <h5 class="display-4">Ar tikrai norite atsijungti?</h5>
+    <form method="post">
+        <button type="submit" class="btn btn-success">Taip</button>
+    </form>
+    <a asp-page="index"><input type="submit" class="btn btn-danger" value="Atšaukti" /></a>
+</div>
