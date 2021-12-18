@@ -84,33 +84,6 @@ namespace HotelServices.Pages
                 Console.WriteLine(client.Name);
                 reader.Close();
             }
-            //jei prisijunge registraturos darbuotojas
-            if (role == "rworker")
-            {
-                query = @"
-                SELECT *
-                FROM Registraturos_darbuotojas
-                WHERE id_Naudotojas = @id;
-                ";
-                cmd = new SqlCommand(query, dbc);
-                cmd.Parameters.AddWithValue("@id", id);
-                reader = cmd.ExecuteReader();
-                reader.Read();
-                IDataRecord clientData = (IDataRecord)reader;
-
-                Console.WriteLine("Client logged in.");
-                Client client = new Client
-                (
-                    (int)id,
-                    role,
-                    (string)clientData[0],
-                    (string)clientData[1],
-                    (string)clientData[2],
-                    (DateTime)clientData[3]
-                );
-                Console.WriteLine(client);
-                reader.Close();
-            }
 
 
         }
