@@ -1,5 +1,5 @@
 ﻿@page
-@model LoginModel
+@model RegisterModel
 @{
     ViewData["Title"] = "Registracijos langas";
 }
@@ -13,22 +13,52 @@
             <h2 style="font-weight:normal">Įveskite registracijos duomenis</h2>
             <form style="margin-left:35%;" method="post">
                 <div class="form-group">
-                    <div class="row">
+                    <div class="form-row">
+                        <input placeholder="Prisijungimo vardas" type="text" name="username" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-row">
                         <input placeholder="El.Paštas" type="email" name="email" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="row">
+                    <div class="form-row">
                         <input placeholder="Slaptažodis" type="password" name="password" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="row">
+                    <div class="form-row">
                         <input placeholder="Pakartoti slapažodį" type="password" name="rpassword" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="row" style="margin-left:10%">
+                    <div class="form-row">
+                        <input placeholder="Vardas" type="text" name="name" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <input placeholder="Pavardė" type="text" name="surname" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <input placeholder="Telefono numeris" type="text" name="phone" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-row" style="margin-left:10%">
+                        Gimimo data
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-row" style="margin-left:1.5%">
+                        <input placeholder="Gimimo data" type="date" name="birth" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-row" style="margin-left:10%">
                         <input type="submit" name="submit" value="Registruotis" />
                     </div>
                 </div>
