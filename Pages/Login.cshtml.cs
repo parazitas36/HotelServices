@@ -31,6 +31,7 @@ namespace HotelServices.Pages
         {
 
         }
+
         public void OnPost(string username, string password)
         {
             Console.WriteLine(username);
@@ -80,7 +81,7 @@ namespace HotelServices.Pages
                     (string)clientData[2],
                     (DateTime)clientData[3]
                 );
-                Console.WriteLine(client);
+                Console.WriteLine(client.Name);
                 reader.Close();
             }
             //jei prisijunge registraturos darbuotojas
@@ -110,7 +111,6 @@ namespace HotelServices.Pages
                 Console.WriteLine(client);
                 reader.Close();
             }
-
 
 
         }
