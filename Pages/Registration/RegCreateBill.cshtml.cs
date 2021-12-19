@@ -44,7 +44,8 @@ namespace HotelServices.Pages
             SqlCommand cmd = new SqlCommand(query, dbc);
             cmd.Parameters.AddWithValue("@cid", id2);
             cmd.Parameters.AddWithValue("@resid", id);
-            int wid = int.Parse(Request.Cookies["id"]);
+            RDarbuotojas rd = HttpContext.Session.GetObjectFromJson<RDarbuotojas>("rworker");
+            int wid = rd.ID;
             cmd.Parameters.AddWithValue("@wid", wid);
             cmd.Parameters.AddWithValue("@date", DateTime.Now.Date);
 

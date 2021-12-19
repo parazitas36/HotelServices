@@ -11,35 +11,34 @@
 <div class="text-center">
     <h1 class="display-4">Kambariai</h1>
     <center>
-        <table >
+        <table>
             @if (Model.kambarys != null)
             {
-            <tr>
-                <th style="text-align:right">Kambaryio Nr.:</th>
-                <th></th>
-                <td>@Model.kambarys.Nr</td>
-            </tr>
-            <tr>
-                <th style="text-align:left">Kambario Statusas:</th>
-                <th></th>
-                <td>
-                   
-                </td>
-            </tr>
+                <tr>
+                    <th style="text-align:right">Kambaryio Nr.:</th>
+                    <th></th>
+                    <td>@Model.kambarys.Nr</td>
+                </tr>
+                <tr>
+                    <th style="text-align:left">Kambario Statusas:</th>
+                    <th></th>
+                    <td>@Model.kambarys.Statusas</td>
+                </tr>
             }
         </table>
         <br />
-        <table class="table-striped">
-        </table>
-        <form method="post">
-            <select name="selectas" id="selectas">
-                @for (int i = 0; i < @Model.dropdownlist.Count; i++)
-                {
-                    <option value="@Model.dropdownlist[i].Value">@Model.dropdownlist[i].Text</option>
-                }
-            </select>
-            <button class="btn btn-success">Taip</button>
-        </form>
-        <a asp-area="" asp-page="/Registration/RegRoomsindex"><input type="button" class="btn btn-danger" value="Atšaukti" /></a>
+        @if (Model.dropdownlist != null)
+        {
+            <form method="post" asp-route-ID="@Model.rid">
+                <select name="selectas" id="selectas" >
+                    @for (int i = 0; i < @Model.dropdownlist.Count; i++)
+                    {
+                        <option value="@Model.dropdownlist[i].Value">@Model.dropdownlist[i].Text</option>
+                    }
+                </select>
+                <button class="btn btn-success">Taip</button>
+            </form>
+            <a asp-area="" asp-page="/Registration/RegRoomsindex"><input type="button" class="btn btn-danger" value="Atšaukti" /></a>
+        }
     </center>
 </div>

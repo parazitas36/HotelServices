@@ -126,6 +126,7 @@ namespace HotelServices.Pages
                 Console.WriteLine(client);
                 reader.Close();
 
+                HttpContext.Session.SetObjectAsJson("rworker", client);
                 //sukuria cookie uz "role" kablelio galima rasyti ir nehardcodintas reiksmes pvz jwt tokena
 
                 HttpContext.Session.SetObjectAsJson("role", "rworker");

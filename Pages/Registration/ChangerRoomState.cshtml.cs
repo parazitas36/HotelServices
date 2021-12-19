@@ -95,17 +95,20 @@ namespace HotelServices.Pages
 
             dbc.Close();
         }
-        public async void OnPost(string selectas)
+        public async void OnPost(int selectas, int id)
         {
-            Console.WriteLine("Clicked");
-            Console.WriteLine(selectas);
-            //string query2 = @"Update Kambarys Set Kambarys.statusas = @id2 where Kambarys.nr = @id1";
-            //SqlCommand cmd2 = new SqlCommand(query2, dbc);
-            //cmd2.Parameters.AddWithValue("@id1", id);
-            //cmd2.Parameters.AddWithValue("@id2", number);
-            //cmd2.ExecuteNonQuery();
+            //Console.WriteLine("pasirinktas");
+            //Console.WriteLine(selectas);
+            //Console.WriteLine("kambario id");
+            //Console.WriteLine(id);
+            string query = @"Update Kambarys Set Kambarys.statusas = @id1 where Kambarys.nr = @id2";
+            SqlCommand cmd = new SqlCommand(query, dbc);
+            cmd.Parameters.AddWithValue("@id1", selectas);
+            cmd.Parameters.AddWithValue("@id2", id);
+            cmd.ExecuteNonQuery();
+            dbc.Close();
 
-            //Response.Redirect("/Registration/RegRoomsindex?ID=" + 1.ToString());
+            Response.Redirect("/Registration/RegRoomsindex?ID=" + 1.ToString());
         }
     }
 }
