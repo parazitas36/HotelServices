@@ -1,0 +1,42 @@
+﻿@page
+@model ChangerRoomStateModel
+@{
+    ViewData["Title"] = "Pagrindinis langas";
+}
+@{
+    Layout = "_LayoutRegistrationWorkers";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Kambariai</h1>
+    <center>
+        <table >
+            <tr>
+                <th style="text-align:right">Kambaryio Nr.:</th>
+                <th></th>
+                <td>@Model.kambarys.Nr</td>
+            </tr>
+            <tr>
+                <th style="text-align:left">Kambario Statusas:</th>
+                <th></th>
+                <td>
+                    <select name="states" id="states">
+                        @for (int i = 0; i < Model.statusai.Count; i++)
+                        {
+                        <option value="@Model.statusai[i].Id">@Model.statusai[i].name</option>
+                        }
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+        <br />
+        <table class="table-striped">
+        </table>
+        <form asp-page-handler="button" asp-route-ID="@Model.kambarys.Nr" method="post">
+            <button class="btn btn-success">Taip</button>
+        </form>
+        <a asp-area="" asp-page="/Registration/RegRoomsindex"><input type="button" class="btn btn-danger" value="Atšaukti" /></a>
+    </center>
+</div>

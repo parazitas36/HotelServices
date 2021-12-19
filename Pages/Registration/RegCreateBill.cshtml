@@ -1,0 +1,40 @@
+﻿@page
+@model RegCreateBillModel
+@{
+    ViewData["Title"] = "Pagrindinis langas";
+}
+@{
+    Layout = "_LayoutRegistrationWorkers";
+}
+
+@if (Model.rezervacija != null)
+{
+    <div class="text-center">
+        <h1 class="display-4">Sąskaitos sudarymas</h1>
+        <center>
+            <table>
+                <tr>
+                    <th style="text-align:right">Rezervuotas kambarys:</th>
+                    <th></th>
+                    <td>@Model.rezervacija.RoomNumber</td>
+                </tr>
+                <tr>
+                    <th style="text-align:left">Nuo / Iki</th>
+                    <th></th>
+                    <td>@Model.rezervacija.Starts.ToString("yyyy/MM/dd") / @Model.rezervacija.Ends.ToString("yyyy/MM/dd")</td>
+                </tr>
+            </table>
+            <br />
+            <h6 style="font-weight:bold">Ar tikrai norite sudaryti sąsakitą?</h6>
+            <table>
+                <tr>
+                    <form asp-page-handler="button" asp-route-ID="@Model.resid" asp-route-ID2="@Model.cid" method="post">
+                        <button class="btn btn-success">Taip</button>
+                    </form>
+                    <a asp-area="" asp-page="/Registration/RegRezervationsindex"><input type="button" class="btn btn-danger" value="Atšaukti" /></a>
+                </tr>
+            </table>
+        </center>
+    </div>
+}
+

@@ -1,62 +1,70 @@
-﻿@page "PayBillCash"
+﻿@page
 @model PayBillCashModel
 @{
     ViewData["Title"] = "Rezervacijos atšaukimas";
 }
 @{
-   Layout = "_LayoutRegistrationWorkers";
+    Layout = "_LayoutRegistrationWorkers";
 }
 
+@if (Model.bill != null)
+{
+    <div class="text-center">
+        <h1 class="display-4">Sąskaitos apmokėjimas</h1>
+        <h3>Sąsakitos duomenys</h3>
+        <center>
+            <div class="col-sm-4" style="vertical-align:middle;">
+                <table>
+                    <tr>
+                        <th>Kliento vardas:</th>
+                        <th></th>
+                        <td>@Model.bill.ClientName</td>
+                    </tr>
+                    <tr>
+                        <th>Kliento pavardė:</th>
+                        <th></th>
+                        <td>@Model.bill.ClientSurName</td>
+                    </tr>
+                    <tr>
+                        <th>Sąskaitos Nr.</th>
+                        <th></th>
+                        <td>@Model.bill.ID</td>
+                    </tr>
+                    <tr>
+                        <th>Sudarymo data</th>
+                        <th></th>
+                        <td>@Model.bill.Date.ToString("yyyy/MM/dd")</td>
+                    </tr>
+                    <tr>
+                        <th>Suma</th>
+                        <th></th>
+                        <td>@Model.bill.Sum</td>
+                    </tr>
+                </table>
+                <br />
+                <b>
+                    Įveskite gautą sumą
+                </b>
 
-<div class="text-center">
-    <h1 class="display-4">Sąskaitos apmokėjimas</h1>
-    <h3>Sąsakitos duomenys</h3>
-    <center>
-        <div class="col-sm-4" style="vertical-align:middle;">
+
+            </div>
             <table>
                 <tr>
-                    <th>Kliento vardas:</th>
-                    <th></th>
-                    <td>Jonas:</td>
-                </tr>
-                <tr>
-                    <th>Kliento pavardė:</th>
-                    <th></th>
-                    <td>Jonaitis:</td>
-                </tr>
-                <tr>
-                    <th>Sąskaitos Nr.</th>
-                    <th></th>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <th>Sudarymo data</th>
-                    <td>2021-11-05</td>
-                </tr>
-                <tr>
-                    <th>Suma</th>
-                    <th></th>
-                    <td>105.50</td>
+                    <td>
+                        <form asp-page-handler="button" asp-route-ID="@Model.sid" asp-route-ID2="@Model.sum" asp-route-ID3="@Model.err" asp-route-ID4="@Model.bill.ReservationId" method="post">
+                            <input type="number" name="suma" min="0" required />
+                            <button class="btn btn-success">Apmokėti</button>
+                        </form>
+                    </td>
+                    <td>
+                        <a asp-page="/Registration/RegBillsindex"><input type="submit" class="btn btn-danger" value="Atšaukti" /></a>
+                    </td>
+                    @if (@Model.err == "1")
+                    {
+                        <h7>Suma per maža</h7>
+                    }
                 </tr>
             </table>
-            <br />
-            <b>
-                Įveskite gautą sumą
-            </b>
-            <input type="text" />
-
-        </div>
-        <table>
-            <tr>
-                <td>
-                    <form asp-page-handler="Pay">
-                        <button onclick="post" class="btn btn-success">Apmokėti</button>
-                    </form>
-                </td>
-                <td>
-                    <a asp-page="RegBillsindex"><input type="submit" class="btn btn-danger" value="Atšaukti" /></a>
-                </td>
-            </tr>
-        </table>
-    </center>
-</div>
+        </center>
+    </div>
+}

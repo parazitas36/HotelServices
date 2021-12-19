@@ -13,14 +13,15 @@ using System.Threading.Tasks;
 
 namespace HotelServices.Pages
 {
-    public class RegRoomsindexModel : PageModel
+    public class RegClientRezervationsModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly IConfiguration _config;
         private SqlConnection dbc;
-        public IList<Kambarys> kambariai;
-        public int success = 0;
-        public RegRoomsindexModel(ILogger<IndexModel> logger, IConfiguration config)
+        public IList<Reservation> rezervacijos;
+        int cid = 0;
+
+        public RegClientRezervationsModel(ILogger<IndexModel> logger, IConfiguration config)
         {
             _logger = logger;
             _config = config;
@@ -29,14 +30,21 @@ namespace HotelServices.Pages
             dbc = db.ConnectToDB();
         }
 
-        public void ReadRooms()
+        public void OnGet(int id)
         {
+            cid = id;
+        }
+        public void GetRezervations()
+        {
+            string query = @"Select Rezervacija.id_Rezervacija, Rezervacija.pradzia, Rezervacija.pabaiga, Rezervacijos_busena.name, 
+            Rezervacija.fk_Kambarysnr from Rezervacija, Rezervacijos_busena 
+            Where Rezervacija.rezervacijos_busena = rezervacijos_busena.id_Rezervacijos_busena 
+            and Rezervacija.fk_Klientasid_Naudotojas = @id";
 
-            string query = @"Select Kambarys.nr as Nr, Kambario_statusai.name as statusas from Kambarys, Kambario_statusai 
-            where Kambarys.statusas = Kambario_statusai.id_Kambario_statusai";
             SqlCommand cmd = new SqlCommand(query, dbc);
+            cmd.Parameters.AddWithValue("@id", cid);
             SqlDataReader reader = cmd.ExecuteReader();
-            kambariai = new List<Kambarys>();
+            rezervacijos = new List<Reservation>();
 
 
             if (reader.HasRows)
@@ -44,21 +52,19 @@ namespace HotelServices.Pages
                 while (reader.Read())
                 {
                     IDataRecord results = (IDataRecord)reader;
-                    Kambarys kambarys = new Kambarys
+                    Reservation rezervacija = new Reservation
                     (
                         (int)results[0],
-                        (string)results[1]
+                        (DateTime)results[1],
+                        (DateTime)results[2],
+                        (string)results[3],
+                        (int)results[4]
                     );
-                    kambariai.Add(kambarys);
+                    rezervacijos.Add(rezervacija);
                 }
                 reader.Close();
             }
             dbc.Close();
-        }
-
-        public void OnGet(int id)
-        {
-            success = id;
         }
     }
 }

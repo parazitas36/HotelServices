@@ -1,42 +1,59 @@
-﻿@page   "RegRezervationsindex"
+﻿@page
 @model RegRezervationsindexModel
 @{
     ViewData["Title"] = "Pagrindinis langas";
 }
 @{
-   Layout = "_LayoutRegistrationWorkers";
+    Layout = "_LayoutRegistrationWorkers";
 }
 
+@{
+    Model.GetRezervations();
+}
 
 <div class="text-center">
     <h1 class="display-4">Rezervacijos</h1>
     <center>
+        @if(Model.success == 1)
+            {
+                <h6 style="color:forestgreen">Rezervacija sėkmingai patvirtinta, klientas įregistruotas</h6>
+            }
         <table class="table-striped">
-            <tr>
-                <th>Nr.</th>
-                <th>Kambario Nr.</th>
-                <th>Nuo</th>
-                <th>Iki</th>
-                <th>Rezervacijos būsena</th>
-                <th></th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>100</td>
-                <td>2021-11-20</td>
-                <td>2021-11-27</td>
-                <td>Rezervuota</td>
-                <td><a asp-page="AprroveReservation"><input type="button" value="Patvirtinti rezervaciją" /></a></td>
-            </tr>
+            <thead>
+                <tr>
+                    <th>Nr</th>
+                    <th>Pradžia</th>
+                    <th>Pabaiga</th>
+                    <th>Būsena</th>
+                    <th>Kambario Nr.</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    if (Model.rezervacijos.Count == 0)
+                    {
+                        <tr><td colspan="5">Neturite kamberių</td></tr>
+                    }
+                }
+                @{
+                    for (int i = 0; i < Model.rezervacijos.Count; i++)
+                    {
+                                <tr>
+                                    <td>@Model.rezervacijos[i].ID</td>
+                                    <td>@Model.rezervacijos[i].Starts.ToString("yyyy/MM/dd")</td>
+                                    <td>@Model.rezervacijos[i].Ends.ToString("yyyy/MM/dd")</td>
+                                    <td>@Model.rezervacijos[i].Status</td>
+                                    <td>@Model.rezervacijos[i].RoomNumber</td>
+                                    @if (Model.rezervacijos[i].Status.Contains("laukiama"))
+                                    {
 
-            <tr>
-                <td>2</td>
-                <td>200</td>
-                <td>2021-11-01</td>
-                <td>2021-11-05</td>
-                <td>Rezervuota</td>
-                <td><a asp-page="AprroveReservation"><input type="button" value="Patvirtinti rezervaciją" /></a></td>
-            </tr>
+                                        <td><a asp-area="" asp-page="/Registration/ApproveReservation" asp-route-ID="@Model.rezervacijos[i].ID" asp-route-ID2="@Model.rezervacijos[i].RoomNumber"><input type="submit" class="btn btn-success" value="Patvirtinti" /></a></td>
+                                    }
+                                    <td><a asp-area="" asp-page="/Registration/RegCreateBill" asp-route-ID="@Model.rezervacijos[i].ID"><input type="submit" class="btn btn-success" value="Sudaryti sąskaitą" /></a></td>
+                                </tr>
+                    }
+                }
+            </tbody>
         </table>
     </center>
 </div>

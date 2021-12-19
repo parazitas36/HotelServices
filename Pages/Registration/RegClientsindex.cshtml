@@ -1,38 +1,49 @@
-﻿@page "RegClientsindex"
+﻿@page 
 @model RegClientsindexModel
 @{
     ViewData["Title"] = "Pagrindinis langas";
 }
 @{
-   Layout = "_LayoutRegistrationWorkers";
+    Layout = "_LayoutRegistrationWorkers";
 }
 
+@{
+    Model.GetClients();
+}
 
 <div class="text-center">
     <h1 class="display-4">Klientai</h1>
     <center>
         <table class="table-striped">
-            <tr>
-                <th>Kliento vardas</th>
-                <th>Kliento pavardė</th>
-                <th>Kliento Tel. Nr.</th>
-                <th>Gimimo data</th>
-            </tr>
-            <tr>
-                <td>Jonas</td>
-                <td>Jonaitis</td>
-                <td>860666587</td>
-                <td>1989-01-23</td>
-                <td><a asp-page="RegRezervationsindex"><input type="button" class="btn-light" value="Peržiūrėti kliento rezervacijas" /></a></td>
-            </tr>
-
-            <tr>
-                <td>Petras</td>
-                <td>Petraitis</td>
-                <td>860611127</td>
-                <td>1989-01-23</td>
-                <td><a asp-page="RegRezervationsindex"><input type="button" class="btn-light" value="Peržiūrėti kliento rezervacijas" /></a></td>
-            </tr>
-        </table>
+            <thead>
+                <tr>
+                    <th>Vardas</th>
+                    <th>Pavardė</th>
+                    <th>Gimimo data</th>
+                    <th>Tel. Nr.</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    if (Model.klientai.Count == 0)
+                    {
+                        <tr><td colspan="5">Neturite kamberių</td></tr>
+                    }
+                }
+                @{
+                    for (int i = 0; i < Model.klientai.Count; i++)
+                    {
+                        <tr>
+                            <td>@Model.klientai[i].Name</td>
+                            <td>@Model.klientai[i].Surname</td>
+                            <td>@Model.klientai[i].Birth.ToString("yyyy/MM/dd")</td>
+                            <td>@Model.klientai[i].Phone</td>
+                            <td><a asp-page="/Registration/RegClientRezervations" asp-route-ID="@Model.klientai[i].id"><input type="button" class="btn btn-success" value="Peržiūrėti rezervacijas" /></a></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+            </table>
     </center>
 </div>

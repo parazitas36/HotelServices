@@ -21,5 +21,9 @@ namespace HotelServices.Data
             Status = status;
             RoomNumber = roomNumber;
         }
+
+        public Reservation()
+        {
+        }
     }
 }

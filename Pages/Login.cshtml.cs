@@ -32,7 +32,7 @@ namespace HotelServices.Pages
 
         }
 
-        public IActionResult OnPost(string username, string password)
+        public void OnPost(string username, string password)
         {
             Console.WriteLine(username);
             Console.WriteLine(password);
@@ -49,7 +49,7 @@ namespace HotelServices.Pages
             SqlDataReader reader = cmd.ExecuteReader();
 
             // Grazina error, jei tokio nerado
-            if (!reader.HasRows) { Console.WriteLine("Error login..."); return Redirect("/index");}
+            if (!reader.HasRows) { Console.WriteLine("Error login..."); Response.Redirect("/index");}
 
             reader.Read();
             IDataRecord results = (IDataRecord)reader;
@@ -84,7 +84,7 @@ namespace HotelServices.Pages
                 Console.WriteLine(client.Name);
                 reader.Close();
                 Response.Cookies.Append("role", "client");
-                return Redirect("/clients/index");
+                Response.Redirect("/clients/index");
             }
             //jei prisijunge registraturos darbuotojas
             if (role == "rworker")
@@ -115,11 +115,10 @@ namespace HotelServices.Pages
                 //sukuria cookie uz "role" kablelio galima rasyti ir nehardcodintas reiksmes pvz jwt tokena
 
                 Response.Cookies.Append("role", "rworker");
-                return Redirect("/registration/index");
-                return Redirect("/registration/index");
+                Response.Cookies.Append("id", id.ToString());
+                Response.Redirect("/registration/index");
             }
             dbc.Close();
-            return Redirect("/index");
         }
     }
 }

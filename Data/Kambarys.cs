@@ -9,5 +9,15 @@ namespace HotelServices.Data
     {
         public int Nr { get; set; }
         public string Statusas { get; set; }
+
+        public Kambarys(int nr, string status)
+        {
+            this.Nr = nr;
+            this.Statusas = status;
+        }
+
+        public Kambarys()
+        {
+        }
     }
 }

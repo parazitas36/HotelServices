@@ -1,4 +1,4 @@
-﻿@page "RegBillsindex"
+﻿@page
 @model RegBillsindexModel
 @{
     ViewData["Title"] = "Pagrindinis langas";
@@ -7,35 +7,60 @@
    Layout = "_LayoutRegistrationWorkers";
 }
 
+@{ 
+    Model.GetBills();
+}
+
 
 <div class="text-center">
     <h1 class="display-4">Sąskaitos</h1>
     <center>
+        @if (Model.success == 1)
+        {
+            <h6 style="color:forestgreen">Sėkmingai apmokėta</h6>
+        }
         <table class="table-striped">
-            <tr>
-                <th>Sąskaitos Nr.  </th>
-                <th>Apmokėjimo data  </th>
-                <th>Sudarymo data  </th>
-                <th>Suma  </th>
-                <th>Būsena  </th>
-            </tr>
-            <tr>
-                <td>  1</td>
-                <td>  2021-11-28</td>
-                <td>  2021-11-27</td>
-                <td>  150.50</td>
-                <td>  Apmokėta</td>
-                <td><a asp-page="PayBillCash"><input type="button" class="btn btn-primary" value="Apmokėti" /></a></td>
-            </tr>
-
-            <tr>
-                <td>  2</td>
-                <td>  ---- -- --</td>
-                <td>  2021-11-04</td>
-                <td>  250.20</td>
-                <td>  Neapmokėta</td>
-                <td><a asp-page="PayBillCash"><input type="button" class="btn btn-primary" value="Apmokėti" /></a></td>
-            </tr>
+            <thead>
+                <tr>
+                    <th>Nr</th>
+                    <th>Data</th>
+                    <th>Suma</th>
+                    <th>Būsena</th>
+                    <th>Darbuotojo id</th>
+                    <th>Rezervazijos Nr.</th>
+                    <th>Kliento id</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    if (Model.Bills.Count == 0)
+                    {
+                        <tr><td colspan="5">Neturite kamberių</td></tr>
+                    }
+                }
+                @{
+                    for (int i = 0; i < Model.Bills.Count; i++)
+                    {
+                                <tr>
+                                    <td>@Model.Bills[i].ID</td>
+                                    <td>@Model.Bills[i].Date.ToString("yyyy/MM/dd")</td>
+                                    <td>@Model.Bills[i].Sum</td>
+                                    <td>@Model.Bills[i].Status</td>
+                                    <td>@Model.Bills[i].RegWorkerId</td>
+                                    <td>@Model.Bills[i].ReservationId</td>
+                                    <td>@Model.Bills[i].CliendId</td>
+                                    @if (@Model.Bills[i].Status == "neapmoketa")
+                                    {
+                                        <td><a asp-page="PayBillCash" asp-route-ID="@Model.Bills[i].ID" asp-route-ID2="@Model.Bills[i].Sum" asp-route-ID3="0"><input type="button" class="btn btn-primary" value="Apmokėti" /></a></td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                    }
+                                </tr>
+                    }
+                }
+            </tbody>
         </table>
     </center>
 </div>

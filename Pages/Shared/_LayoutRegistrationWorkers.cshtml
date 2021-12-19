@@ -11,7 +11,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Registrationworker"><b>Viešbučio paslaugų sistema</b></a>
+                <a class="navbar-brand" asp-area="" asp-page="index"><b>Viešbučio paslaugų sistema</b></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -19,16 +19,19 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="RegBillsindex">Saskaitų paieška</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Registration/RegBillsindex">Saskaitos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="RegClientsindex">Klientų paieška</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Registration/RegClientsindex">Klientai</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="RegRezervationsindex">Rezervacijų paieška</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Registration/RegRezervationsindex">Rezervacijos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="RegRoomsindex">Kambarių paieška</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Registration/RegRoomsindex">Kambariai</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Registration/CallWorker">Iškviesti Darbuotoją</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav">
