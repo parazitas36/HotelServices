@@ -11,7 +11,7 @@
 <div class="text-center">
     <h1 class="display-4">Kambariai</h1>
     <center>
-        <table class="table-striped" style="width:80%; justify-content:center; text-align:center;">
+        <table style="width:40%; justify-content:center; text-align:center;">
             @if (Model.kambarys != null)
             {
                 <tr>
@@ -20,7 +20,7 @@
                     <td>@Model.kambarys.Nr</td>
                 </tr>
                 <tr>
-                    <th style="text-align:left">Kambario Statusas:</th>
+                    <th style="text-align:right">Kambario Statusas:</th>
                     <th></th>
                     <td>@Model.kambarys.Statusas</td>
                 </tr>
@@ -36,7 +36,7 @@
                         <option value="@Model.dropdownlist[i].Value">@Model.dropdownlist[i].Text</option>
                     }
                 </select>
-                <button class="btn btn-success">Taip</button>
+                <button class="btn btn-success">Išsaugoti</button>
             </form>
             <a asp-area="" asp-page="/Registration/RegRoomsindex"><input type="button" class="btn btn-danger" value="Atšaukti" /></a>
         }

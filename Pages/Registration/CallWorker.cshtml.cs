@@ -18,11 +18,8 @@ namespace HotelServices.Pages
         private readonly ILogger<IndexModel> _logger;
         private readonly IConfiguration _config;
         private SqlConnection dbc;
-        public Reservation rezervacija;
         public int id { get; set; }
 
-        public int resid;
-        public int roomid = 0;
 
         public CallWorkerModel(ILogger<IndexModel> logger, IConfiguration config)
         {
@@ -36,9 +33,19 @@ namespace HotelServices.Pages
         public void OnGet()
         {
         }
-        public void OnPos()
+        public void OnPost()
         {
-            string query = @"";
+            string query = @"insert into Iskvietimas (pranesimo_tekstas, priimtas, fk_Registraturos_darbuotojasid_Naudotojas) 
+            values ('Laukiama registraturoje', 0, @id)";
+            SqlCommand cmd = new SqlCommand(query, dbc);
+            RDarbuotojas rd = HttpContext.Session.GetObjectFromJson<RDarbuotojas>("rworker");
+            int wid = rd.ID;
+            cmd.Parameters.AddWithValue("@id", wid);
+            cmd.ExecuteNonQuery();
+
+            dbc.Close();
+
+            Response.Redirect("/Registration/index?ID=" + 1.ToString());
         }
         public void GetReservation() 
         {
