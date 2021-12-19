@@ -25,12 +25,12 @@
                     <th>Atšaukti rezervaciją</th>
                 </tr>
             </thead>
-            <tbody>
 
+            <tbody>
                 @{
                     if (Model.reservations.Count == 0)
                     {
-                        <tr><td colspan="5">Neturite rezervacijų</td></tr>
+                        <tr><td colspan="6">Neturite rezervacijų</td></tr>
                     }
                 }
                 @{
@@ -42,7 +42,7 @@
                             <td>@Model.reservations[i].Starts.ToString("yyyy/MM/dd")</td>
                             <td>@Model.reservations[i].Ends.ToString("yyyy/MM/dd")</td>
                             <td>@Model.reservations[i].Status</td>
-                            <td><a href="/Cancelreservation"><input type="button" value="Atšaukti" /></a></td>
+                            <td><a asp-area="" asp-page="/Clients/Cancelreservation" asp-route-ID="@Model.reservations[i].ID"><input type="button" value="Atšaukti" /></a></td>
                         </tr>
                     }
                 }

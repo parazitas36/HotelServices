@@ -32,13 +32,19 @@ namespace HotelServices.Pages
         public void GetReservations()
         {
             reservations = new List<Reservation>();
+
+            // Paima kliento duomenis issauogtus sesijoje
+            Client c = HttpContext.Session.GetObjectFromJson<Client>("ClientData");
+            Console.WriteLine(c.Name + " " + c.Surname);
+
+            // Atrenka kliento rezervacijas
             string query = @"
             SELECT r.id_Rezervacija, r.pradzia, r.pabaiga, (SELECT rb.name FROM Rezervacijos_busena rb WHERE rb.id_Rezervacijos_busena = r.rezervacijos_busena) as busena, r.fk_Kambarysnr
             FROM Rezervacija r
             WHERE r.fk_Klientasid_Naudotojas = @clientid
             ";
             SqlCommand cmd = new SqlCommand(query, dbc);
-            cmd.Parameters.AddWithValue("@clientid", 1);
+            cmd.Parameters.AddWithValue("@clientid", c.ID);
             SqlDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows)
             {

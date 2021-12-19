@@ -11,6 +11,10 @@
     <center>
         <div style="border-style:double; width:50%; margin-top:10%; background-color: whitesmoke">
             <h2 style="font-weight:normal">Įveskite prisijungimo duomenis</h2>
+            @if (Model.ERROR != "")
+            {
+                <h4 style="color:red; font-size: 80%">@Model.ERROR</h4>
+            }
             <form style="margin-left:35%;" method="post">
                 <div class="form-group">
                     <div class="row">

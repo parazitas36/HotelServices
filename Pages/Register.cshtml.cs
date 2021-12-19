@@ -1,4 +1,6 @@
 ﻿using HotelServices.Controllers;
+using HotelServices.Models;
+using HotelServices.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
@@ -16,13 +18,16 @@ namespace HotelServices.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly IConfiguration _config;
+        private readonly IMailService _mailService;
         private SqlConnection dbc;
         public string ERROR = "";
 
-        public RegisterModel(ILogger<IndexModel> logger, IConfiguration config)
+        public RegisterModel(ILogger<IndexModel> logger, IConfiguration config, IMailService mailService)
         {
             _logger = logger;
             _config = config;
+            _mailService = mailService;
+
             DBController db = new DBController(config);
             dbc = db.ConnectToDB();
         }
@@ -88,6 +93,17 @@ namespace HotelServices.Pages
             cmd.Parameters.AddWithValue("@id", insertedID);
             cmd.ExecuteNonQuery();
             dbc.Close();
+
+            MailController mc = new MailController(_mailService);
+            MailRequest mr = new MailRequest
+            {
+                Body = String.Format($"<b><h3>Jūsų prisijungimo duomenys</h3></b><br></br> <b>Prisijungimo vardas:</b> {username}<br></br> <b>El.Paštas:</b> {email} <br></br> <b>Slaptažodis:</b> {password}"),
+                Subject = "HotelServices Paskyra",
+                ToEmail = email
+            };
+            mc.SendMail(mr);
+
+            Response.Redirect("/login");
         }
     }
 }

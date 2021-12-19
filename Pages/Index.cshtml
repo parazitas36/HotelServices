@@ -6,7 +6,7 @@
 
 
 
-@switch(Request.Cookies["role"])
+@switch(HttpContext.Session.GetObjectFromJson<string>("role"))
 {
     case "rworker":
         Response.Redirect("/Registration");
@@ -16,6 +16,9 @@
         break;
     case "client":
         Response.Redirect("/Clients");
+        break;
+    case "admin":
+        Response.Redirect("/Admin");
         break;
 }
 

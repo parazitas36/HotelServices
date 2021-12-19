@@ -21,15 +21,10 @@ namespace HotelServices.Pages
         {
 
         }
-        public IActionResult OnPost()
+        public void OnPost()
         {
-            //paima cookie value
-            var role = Request.Cookies["role"];
-
-            //istrina cookie
-            Response.Cookies.Delete("role");
-
-            return Redirect("../../");
+            HttpContext.Session.Clear();
+            Response.Redirect("/index");
         }
     }
 }

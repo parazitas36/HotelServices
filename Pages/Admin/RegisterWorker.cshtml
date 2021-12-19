@@ -10,4 +10,47 @@
 
 <div class="text-center">
     <h1 class="display-4">Darbuotojo registracija</h1>
+    <form method="post">
+        <h3>Užpildykite duomenis</h3>
+        @if(Model.ERROR != "")
+            {
+                <h5 style="color:red;">@Model.ERROR</h5>
+            }
+        <div class="form-group">
+            <h5>Darbuotojo paskyros duomenys</h5>
+            <div class="row">
+                <div class="col-3">
+                </div>
+                <div class="col-2">
+                    <input type="text" name="username" placeholder="Prisijungimo vardas" required/>
+                </div>
+                <div class="col-2">
+                    <input type="email" name="email" placeholder="El.Paštas" required/>
+                </div>
+                <div class="col-2">
+                    <input type="password" name="password" placeholder="Slaptažodis" required/>
+                </div>
+            </div>
+            <h5>Darbuotojo asmenininai duomenys</h5>
+            <div class="row">
+                <div class="col-4">
+                </div>
+                <div class="col-2">
+                    <input type="text" name="name" placeholder="Vardas" required/>
+                </div>
+                <div class="col-2">
+                    <input type="text" name="surname" placeholder="Pavardė" required/>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-4">
+                </div>
+                <div class="col-4" style="margin-right:0;right:0">
+                    Gimimo data: <input type="date" name="birth" placeholder="Gimimo data" required/>
+                </div>
+            </div>
+        </div>
+        <input type="submit" name="submit" value="Registruoti" />
+    </form>
 </div>

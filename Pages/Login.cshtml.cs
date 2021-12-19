@@ -18,6 +18,7 @@ namespace HotelServices.Pages
         private readonly ILogger<IndexModel> _logger;
         private readonly IConfiguration _config;
         private SqlConnection dbc; // Connection to database
+        public string ERROR = "";
 
         public LoginModel(IConfiguration config, ILogger<IndexModel> logger)
         {
@@ -36,6 +37,8 @@ namespace HotelServices.Pages
         {
             Console.WriteLine(username);
             Console.WriteLine(password);
+            HttpContext.Session.Clear();
+            ERROR = "";
 
             // Paima id ir role, jei toks user yra
             string query = @"
@@ -49,7 +52,7 @@ namespace HotelServices.Pages
             SqlDataReader reader = cmd.ExecuteReader();
 
             // Grazina error, jei tokio nerado
-            if (!reader.HasRows) { Console.WriteLine("Error login..."); Response.Redirect("/index");}
+            if (!reader.HasRows) { ERROR = "Nepavyko prisijungti, įvesti duomenys neteisingi!"; return;}
 
             reader.Read();
             IDataRecord results = (IDataRecord)reader;
@@ -57,9 +60,17 @@ namespace HotelServices.Pages
             string? role = (string)results[1];
             reader.Close();
 
+            // Jei prisijunge adminas
+            if(role == "admin")
+            {
+                HttpContext.Session.SetObjectAsJson("role", "admin");
+                Response.Redirect("/admin/index");
+            }
+
             // Jei prisijunge klientas
             if(role == "client")
             {
+                // Atrenka kliento duomenis
                 query = @"
                 SELECT *
                 FROM Klientas
@@ -81,9 +92,12 @@ namespace HotelServices.Pages
                     (string)clientData[2],
                     (DateTime)clientData[3]
                 );
+
+                // Iraso kliento duomenis i sesija
+                HttpContext.Session.SetObjectAsJson("ClientData", client);
                 Console.WriteLine(client.Name);
                 reader.Close();
-                Response.Cookies.Append("role", "client");
+                HttpContext.Session.SetObjectAsJson("role", "client");
                 Response.Redirect("/clients/index");
             }
             //jei prisijunge registraturos darbuotojas
@@ -114,8 +128,7 @@ namespace HotelServices.Pages
 
                 //sukuria cookie uz "role" kablelio galima rasyti ir nehardcodintas reiksmes pvz jwt tokena
 
-                Response.Cookies.Append("role", "rworker");
-                Response.Cookies.Append("id", id.ToString());
+                HttpContext.Session.SetObjectAsJson("role", "rworker");
                 Response.Redirect("/registration/index");
             }
             dbc.Close();
