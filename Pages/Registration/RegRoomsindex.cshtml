@@ -19,8 +19,8 @@
         {
             <h6 style="color:forestgreen">Sėkmingai pakeistas statusas</h6>
         }
-        <table class="table-striped">
-            <thead>
+        <table class="table-striped" style="width:80%; justify-content:center; text-align:center;">
+            <thead >
                 <tr>
                     <th>Kambario Nr.</th>
                     <th>Statusas</th>
@@ -40,7 +40,7 @@
                         <tr>
                             <td>@Model.kambariai[i].Nr</td>
                             <td>@Model.kambariai[i].Statusas</td>
-                            <td><a asp-page="/Registration/ChangerRoomState" asp-route-ID="@Model.kambariai[i].Nr"><input type="button" class="btn btn-success" value="Keisti Būseną" /></a></td>
+                            <td><a asp-page="/Registration/ChangerRoomState" asp-route-ID="@Model.kambariai[i].Nr"><input type="button" class="btn btn-primary" value="Keisti Būseną" /></a></td>
                         </tr>
                     }
                 }

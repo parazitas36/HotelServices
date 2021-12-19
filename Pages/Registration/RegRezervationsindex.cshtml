@@ -18,7 +18,7 @@
             {
                 <h6 style="color:forestgreen">Rezervacija sėkmingai patvirtinta, klientas įregistruotas</h6>
             }
-        <table class="table-striped">
+        <table class="table-striped" style="width:80%; justify-content:center; text-align:center;">
             <thead>
                 <tr>
                     <th>Nr</th>
@@ -47,9 +47,17 @@
                                     @if (Model.rezervacijos[i].Status.Contains("laukiama"))
                                     {
 
-                                        <td><a asp-area="" asp-page="/Registration/ApproveReservation" asp-route-ID="@Model.rezervacijos[i].ID" asp-route-ID2="@Model.rezervacijos[i].RoomNumber"><input type="submit" class="btn btn-success" value="Patvirtinti" /></a></td>
+                                        <td><a asp-area="" asp-page="/Registration/ApproveReservation" asp-route-ID="@Model.rezervacijos[i].ID" asp-route-ID2="@Model.rezervacijos[i].RoomNumber"><input type="submit" class="btn btn-primary" value="Patvirtinti" /></a>
+                                            <a asp-area="" asp-page="/Registration/RegCreateBill" asp-route-ID="@Model.rezervacijos[i].ID"><input type="submit" class="btn btn-success" value="Sudaryti sąskaitą" /></a>
+                                    </td>
                                     }
-                                    <td><a asp-area="" asp-page="/Registration/RegCreateBill" asp-route-ID="@Model.rezervacijos[i].ID"><input type="submit" class="btn btn-success" value="Sudaryti sąskaitą" /></a></td>
+                                    else
+                                    {
+                                <td>
+                                    <a asp-area="" asp-page="/Registration/RegCreateBill" asp-route-ID="@Model.rezervacijos[i].ID"><input type="submit" class="btn btn-success" value="Sudaryti sąskaitą" /></a>
+                                </td>
+                                    }
+
                                 </tr>
                     }
                 }
