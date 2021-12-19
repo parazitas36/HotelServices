@@ -1,5 +1,7 @@
 ﻿using HotelServices.Controllers;
 using HotelServices.Data;
+using HotelServices.Models;
+using HotelServices.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
@@ -17,13 +19,17 @@ namespace HotelServices.Pages
     {
         private readonly ILogger<ReserveModel> _logger;
         private readonly IConfiguration _config;
+        private readonly IMailService _mailService;
         public string ERROR = "";
+
         DBController db;
         SqlConnection dbc;
 
-        public ReserveModel(ILogger<ReserveModel> logger, IConfiguration config)
+        public ReserveModel(ILogger<ReserveModel> logger, IConfiguration config, IMailService mailService)
         {
             _logger = logger;
+            _config = config;
+            _mailService = mailService;
             db = new DBController(config);
         }
 
@@ -52,6 +58,19 @@ namespace HotelServices.Pages
             reader.Close();
 
             Client client = HttpContext.Session.GetObjectFromJson<Client>("ClientData");
+            // Paimti kliento email
+            query = @"
+            SELECT el_pastas
+            FROM Naudotojas
+            WHERE id_Naudotojas = @clientid
+            ";
+            cmd = new SqlCommand(query, dbc);
+            cmd.Parameters.AddWithValue("@clientid", client.ID);
+            reader = cmd.ExecuteReader();
+            reader.Read();
+            string email = (string)reader[0];
+            reader.Close();
+
             // Uzrezervuoti
             query = @"
             INSERT INTO Rezervacija
@@ -64,16 +83,26 @@ namespace HotelServices.Pages
             cmd.Parameters.AddWithValue("@clientid", client.ID);
             cmd.Parameters.AddWithValue("@roomnr", firstRoomID);
 
+
             if (cmd.ExecuteNonQuery() != 0)
             {
-                Console.WriteLine("Uzrezervuota");
-                Console.WriteLine("Laikas: " + start.ToString() + " - " + end.ToString()  + " Kambario nr: " + firstRoomID );
+                // Issiusti el.laiska su rezervacijos duomenim
+                MailController mc = new MailController(_mailService);
+                MailRequest mr = new MailRequest
+                {
+                    Subject = "Jūsų rezervacija sėkminga",
+                    ToEmail = email,
+                    Body = String.Format($"<h3>Siunčiame Jūsų rezervacijos duomenis</h3><br/><b>Kambario numeris:</b>{firstRoomID}<br/><b>Data:</b>Nuo {start.ToString("yyyy/MM/dd")} iki {end.ToString("yyyy/MM/dd")}")
+                };
+
+                mc.SendMail(mr);
             }
             else
             {
                 ERROR = "Nepavyko uzregistruoti";
                 return;
             }
+
             Response.Redirect("/Clients/Reservations");
         }
 
