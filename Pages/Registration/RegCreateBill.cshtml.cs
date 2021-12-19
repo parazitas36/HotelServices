@@ -13,18 +13,16 @@ using System.Threading.Tasks;
 
 namespace HotelServices.Pages
 {
-    public class AprroveReservationModel : PageModel
+    public class RegCreateBillModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly IConfiguration _config;
         private SqlConnection dbc;
         public Reservation rezervacija;
-        public int id { get; set; }
+        public int resid = 0;
+        public int cid = 0;
 
-        public int resid;
-        public int roomid = 0;
-
-        public AprroveReservationModel(ILogger<IndexModel> logger, IConfiguration config)
+        public RegCreateBillModel(ILogger<IndexModel> logger, IConfiguration config)
         {
             _logger = logger;
             _config = config;
@@ -32,29 +30,29 @@ namespace HotelServices.Pages
             DBController db = new DBController(config);
             dbc = db.ConnectToDB();
         }
-
-        public void OnGet(int id, int id2)
+        public void OnGet(int id)
         {
             resid = id;
-            roomid = id2;
-            Console.WriteLine(id);
             GetReservation();
         }
         public async void OnPostButton(int id, int id2)
         {
-            string query = @"UPDATE Rezervacija Set rezervacijos_busena = 3 Where Rezervacija.id_Rezervacija = @id";
+            //sukuria saskaita
+            string query = @"insert into Saskaita (sudarymo_data, suma, busena, fk_Registraturos_darbuotojasid_Naudotojas, 
+            fk_Rezervacijaid_Rezervacija, fk_Klientasid_Naudotojas) 
+            values (@date, 150, 1, @wid, @resid, @cid)";
             SqlCommand cmd = new SqlCommand(query, dbc);
-            cmd.Parameters.AddWithValue("@id", id2);
+            cmd.Parameters.AddWithValue("@cid", id2);
+            cmd.Parameters.AddWithValue("@resid", id);
+            int wid = int.Parse(Request.Cookies["id"]);
+            cmd.Parameters.AddWithValue("@wid", wid);
+            cmd.Parameters.AddWithValue("@date", DateTime.Now.Date);
+
             cmd.ExecuteNonQuery();
 
-            string query2 = @"Update Kambarys Set Kambarys.statusas = 3 where Kambarys.nr = @id2";
-            SqlCommand cmd2 = new SqlCommand(query2, dbc);
-            cmd2.Parameters.AddWithValue("@id2", id);
-            cmd2.ExecuteNonQuery();
-
-            Response.Redirect("/Registration/RegRezervationsindex?ID=" + 1.ToString());
+            Response.Redirect("/Registration/RegRezervationsindex");
         }
-        public void GetReservation() 
+        public void GetReservation()
         {
             string query = @"Select Rezervacija.id_Rezervacija, Rezervacija.pradzia, Rezervacija.pabaiga, 
             Rezervacijos_busena.name, Rezervacija.fk_Kambarysnr, Rezervacija.fk_Klientasid_Naudotojas 
@@ -65,7 +63,7 @@ namespace HotelServices.Pages
             SqlCommand cmd = new SqlCommand(query, dbc);
             cmd.Parameters.AddWithValue("@resid", resid);
             SqlDataReader reader = cmd.ExecuteReader();
-          
+
             rezervacija = new Reservation();
 
             if (reader.HasRows)
@@ -81,6 +79,8 @@ namespace HotelServices.Pages
                         (string)results[3],
                         (int)results[4]
                     );
+                    cid = (int)results[5];
+                    Console.WriteLine(cid);
                     rezervacija = rezervacija1;
                 }
                 reader.Close();

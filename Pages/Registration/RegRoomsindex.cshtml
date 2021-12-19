@@ -1,37 +1,50 @@
-﻿@page "RegRoomsindex"
+﻿@page
 @model RegRoomsindexModel
 @{
     ViewData["Title"] = "Pagrindinis langas";
 }
 @{
-   Layout = "_LayoutRegistrationWorkers";
+    Layout = "_LayoutRegistrationWorkers";
+}
+
+@{
+    Model.ReadRooms();
 }
 
 
 <div class="text-center">
     <h1 class="display-4">Kambariai</h1>
     <center>
+        @if (Model.success == 1)
+        {
+            <h6 style="color:forestgreen">Sėkmingai pakeistas statusas</h6>
+        }
         <table class="table-striped">
-            <tr>
-                <th>Kambario Nr.</th>
-                <th>Kmbario statusas</th>
-            </tr>
-            <tr>
-                <td>100</td>
-                <td>Užimtas</td>
-                <td><a asp-page="Changeroomstate"><input type="button" value="Keisti Būseną" /></a></td>
-            </tr>
-
-            <tr>
-                <td>200</td>
-                <td>Laisvas</td>
-                <td><a asp-page="Changeroomstate"><input type="button" value="Keisti Būseną" /></a></td>
-            </tr>
-            <tr>
-                <td>200</td>
-                <td>Tvarkomas</td>
-                <td><a asp-page="Changeroomstate"><input type="button" value="Keisti Būseną" /></a></td>
-            </tr>
+            <thead>
+                <tr>
+                    <th>Kambario Nr.</th>
+                    <th>Statusas</th>
+                    <th>Pasirinkti</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    if (Model.kambariai.Count == 0)
+                    {
+                        <tr><td colspan="5">Neturite kamberių</td></tr>
+                    }
+                }
+                @{
+                    for (int i = 0; i < Model.kambariai.Count; i++)
+                    {
+                        <tr>
+                            <td>@Model.kambariai[i].Nr</td>
+                            <td>@Model.kambariai[i].Statusas</td>
+                            <td><a asp-page="/Registration/ChangerRoomState" asp-route-ID="@Model.kambariai[i].Nr"><input type="button" class="btn btn-success" value="Keisti Būseną" /></a></td>
+                        </tr>
+                    }
+                }
+            </tbody>
         </table>
     </center>
 </div>

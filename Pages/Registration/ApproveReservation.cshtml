@@ -1,36 +1,43 @@
-﻿@page "AprroveReservation"
+﻿@page
+
 @model AprroveReservationModel
+
 @{
-    ViewData["Title"] = "Rezervacijos patvirtinimas";
+    ViewData["Title"] = "Pagrindinis langas";
 }
+
 @{
-   Layout = "_LayoutRegistrationWorkers";
+    Layout = "_LayoutRegistrationWorkers";
 }
 
 
-<div class="text-center">
-    <h1 class="display-4">Rezervacijos patvirtinimas</h1>
-    <h3>Rezervacijos duomenys</h3>
-    <center>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-sm-4">
-                </div>
-                <div class="col-sm-4">
-                    Rezervuotas kambarys: 201
-                </div>
+@if (Model.rezervacija != null)
+{
+    <div class="text-center">
+        <h1 class="display-4">Rezervacijos patvirtinimas</h1>
+        <h3>Rezervacijos duomenys</h3>
+        <center>
+            <div class="form-group">
+                <table class="table-bordered">
+                    <tr>
+                        <th style="text-align:right">Rezervuotas kambarys:</th>
+                        <th></th>
+                        <td>@Model.rezervacija.RoomNumber</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align:left">Nuo / Iki</th>
+                        <th></th>
+                        <td>@Model.rezervacija.Starts.ToString("yyyy/MM/dd") / @Model.rezervacija.Ends.ToString("yyyy/MM/dd")</td>
+                    </tr>
+                </table>
+                    <br />
+                    Ar tikrai norite patvirtinti rezervaciją?
+                    <form asp-page-handler="button" asp-route-ID="@Model.resid" asp-route-ID2="@Model.roomid" method="post">
+                        <button class="btn btn-success">Taip</button>
+                    </form>
+                    <a asp-area="" asp-page="/Registration/RegRezervationsindex"><input type="button" class="btn btn-danger" value="Atšaukti" /></a>
             </div>
-            <div class="row">
-                <div class="col-sm-4">
-                </div>
-                <div class="col-sm-4">
-                    Data: 2021/11/25 - 2021/12/01
-                </div>
-            </div>
-            <br />
-            Ar tikrai norite patvirtinti rezervaciją?
-            <input type="button" class="btn-success" value="Taip" />
-            <input type="button" class="btn-danger" value="Ne" />
-        </div>
-    </center>
-</div>
+        </center>
+    </div>
+}
+
