@@ -85,15 +85,14 @@ namespace HotelServices.Pages
         }
         public async void OnPostButton(int id)
         {
-            Console.WriteLine(Request.Form["states"]);
-            int number = int.Parse(Request.Form["states"].ToString());
-            string query2 = @"Update Kambarys Set Kambarys.statusas = @id2 where Kambarys.nr = @id1";
-            SqlCommand cmd2 = new SqlCommand(query2, dbc);
-            cmd2.Parameters.AddWithValue("@id1", id);
-            cmd2.Parameters.AddWithValue("@id2", number);
-            cmd2.ExecuteNonQuery();
 
-            Response.Redirect("/Registration/RegRoomsindex?ID=" + 1.ToString());
+            //string query2 = @"Update Kambarys Set Kambarys.statusas = @id2 where Kambarys.nr = @id1";
+            //SqlCommand cmd2 = new SqlCommand(query2, dbc);
+            //cmd2.Parameters.AddWithValue("@id1", id);
+            //cmd2.Parameters.AddWithValue("@id2", number);
+            //cmd2.ExecuteNonQuery();
+
+            //Response.Redirect("/Registration/RegRoomsindex?ID=" + 1.ToString());
         }
     }
 }
