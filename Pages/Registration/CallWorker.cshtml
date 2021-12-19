@@ -1,0 +1,28 @@
+﻿@page
+
+@model CallWorkerModel
+
+@{
+    ViewData["Title"] = "Pagrindinis langas";
+}
+
+@{
+    Layout = "_LayoutRegistrationWorkers";
+}
+
+
+    <div class="text-center">
+        <h1 class="display-4">Darbuotojo iškvietimas</h1>
+        <h3>Iškviesti darbuotoją?</h3>
+        <center>
+            <div class="form-group">
+                <div class="container">
+                    <form asp-page-handler="button" method="post">
+                        <button class="btn btn-success">Taip</button>
+                    </form>
+                    <a asp-area="" asp-page="/Registration"><input type="button" class="btn btn-danger" value="Atgal" /></a>
+                </div>
+            </div>
+        </center>
+    </div>
+

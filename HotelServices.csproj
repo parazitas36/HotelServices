@@ -15,6 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Pages\Registration\CallWorker.cshtml">
+      <CopyToOutputDirectory></CopyToOutputDirectory>
+    </Content>
     <Content Update="Pages\Registration\PayBillCash.cshtml">
       <CopyToOutputDirectory></CopyToOutputDirectory>
     </Content>

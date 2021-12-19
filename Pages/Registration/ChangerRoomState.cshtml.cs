@@ -2,6 +2,7 @@
 using HotelServices.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -21,6 +22,7 @@ namespace HotelServices.Pages
         public Kambarys kambarys;
         public int rid = 0;
         public IList<RoomState> statusai;
+        public IList<SelectListItem> dropdownlist;
         public ChangerRoomStateModel(ILogger<IndexModel> logger, IConfiguration config)
         {
             _logger = logger;
@@ -81,11 +83,22 @@ namespace HotelServices.Pages
                 reader.Close();
             }
 
+            dropdownlist = new List<SelectListItem>();
+
+            foreach (RoomState item in statusai)
+            {
+                dropdownlist.Add(new SelectListItem { 
+                    Value = item.Id.ToString(),
+                    Text = item.name
+                });
+            }
+
             dbc.Close();
         }
-        public async void OnPostButton(int id)
+        public async void OnPost(string selectas)
         {
-
+            Console.WriteLine("Clicked");
+            Console.WriteLine(selectas);
             //string query2 = @"Update Kambarys Set Kambarys.statusas = @id2 where Kambarys.nr = @id1";
             //SqlCommand cmd2 = new SqlCommand(query2, dbc);
             //cmd2.Parameters.AddWithValue("@id1", id);
