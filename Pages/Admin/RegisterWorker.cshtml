@@ -12,6 +12,10 @@
     <h1 class="display-4">Darbuotojo registracija</h1>
     <form method="post">
         <h3>Užpildykite duomenis</h3>
+        @if(Model.ERROR != "")
+            {
+                <h5 style="color:red;">@Model.ERROR</h5>
+            }
         <div class="form-group">
             <h5>Darbuotojo paskyros duomenys</h5>
             <div class="row">
