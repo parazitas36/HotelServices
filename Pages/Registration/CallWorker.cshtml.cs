@@ -36,8 +36,9 @@ namespace HotelServices.Pages
         public void OnGet()
         {
         }
-        public async void OnPostButton()
+        public void OnPos()
         {
+            string query = @"";
         }
         public void GetReservation() 
         {
