@@ -1,0 +1,32 @@
+﻿@page
+@model HotelServices.Pages.Clients.ServicesModel
+@{
+    ViewData["Title"] = "Papildomos paslaugos";
+    Layout = "_LayoutClient";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Papildomos paslaugos</h1>
+    <center>
+        @if (Model.BillID != null)
+        {
+            <h5>Pasirinkit paslaugą</h5>
+            <form style="justify-content:center; align-items:center; align-self:center;" method="post">
+                <div class="form-group">
+                    <select name="service" id="service">
+                        @for (int i = 0; i < Model.servicesDDlist.Count; i++)
+                        {
+                            <option value=@Model.servicesDDlist[i].Value>@Model.servicesDDlist[i].Text</option>
+                        }
+                    </select>
+                </div>
+                <input type="submit" value="Užsakyti" />
+            </form>
+        }
+        else
+        {
+            <h5>@Model.ERROR</h5>
+        }
+
+    </center>
+</div>

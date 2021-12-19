@@ -1,0 +1,21 @@
+﻿@page
+@model HotelServices.Pages.Clients.SuccessModel
+@{
+}
+
+<script type="text/javascript">
+    function redirect(){
+        const d = new Date();
+        let current = d.getSeconds();
+        let temp = new Date();
+        while (temp.getSeconds() - current < 2) {
+            temp = new Date();
+            continue;
+        }
+        console.log(2);
+        window.location.href = "https://localhost:5001/Clients/index";
+    };
+</script>
+<body class="text-center" onload="redirect()">
+    <h1>Paslauga užsakyta sėkmingai, tuoj gražinsime jus į pagrindinį puslapį!</h1>
+</body>
