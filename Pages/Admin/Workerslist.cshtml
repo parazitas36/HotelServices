@@ -1,0 +1,43 @@
+﻿@page
+@model WorkerslistModel
+@{
+    ViewData["Title"] = "Darbuotojų sąrašas";
+}
+@{
+   Layout = "_Layoutadmin";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Darbuotojų sąrašas</h1>
+    <center>
+        <table class="table-striped" width="90%" style="text-align:center">
+            <thead>
+                <tr>
+                    <th>Vardas</th>
+                    <th>Pavardė</th>
+                    <th>Gimimo data</th>
+                    <th>Išregistravimas</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.workers.Count > 0)
+                {
+                    for (int i = 0; i < Model.workers.Count; i++)
+                    {
+                        <tr>
+                            <td>@Model.workers[i].Name</td>
+                            <td>@Model.workers[i].Surname</td>
+                            <td>@Model.workers[i].Birth.ToString("yyyy/MM/dd")</td>
+                            <td><a asp-area="" asp-page="/Admin/DeleteWorker" asp-route-ID="@Model.workers[i].ID"><input type="button" value="Išregistruoti" /></a></td>
+                        </tr>
+                    }
+            }
+            else
+            {
+                <tr><td colspan="4">Šiuo metu darbuotojų nėra.</td></tr>
+            }
+            </tbody>
+        </table>
+    </center>
+</div>

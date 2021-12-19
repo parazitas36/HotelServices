@@ -10,27 +10,39 @@
 
 <div class="text-center">
     <h1 class="display-4">Paskyros naikinimas</h1>
-    <h3>Jūsų paskyros duomenys</h3>
+    <h3>Jūsų duomenys</h3>
     <center>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-sm-4">
+        @if (Model.client != null)
+        {
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4">
+                    </div>
+                    <div class="col-sm-4">
+                        Jūsų esate: @Model.client.Name @Model.client.Surname
+                    </div>
                 </div>
-                <div class="col-sm-4">
-                    Jūsų prisijungimo vardas
+                <div class="row">
+                    <div class="col-sm-4">
+                    </div>
+                    <div class="col-sm-4">
+                        Nesumokėtų sąskaitų: @Model.unpaidCount
+                    </div>
                 </div>
+                <br />
+                @if (Model.unpaidCount == 0)
+                {
+                    <h6> Ar tikrai norite panaikinti paskyrą ? </h6>
+                    <form method="post">
+                        <input type="submit" class="btn btn-danger" value="Taip" />
+                        <input type="button" class="btn btn-light" value="Ne" />
+                    </form>
+                }
+                else
+                {
+                    <h6>Negalite panaikinti paskyros, nes turite nesumokėtų sąskaitų!</h6>
+                }
             </div>
-            <div class="row">
-                <div class="col-sm-4">
-                </div>
-                <div class="col-sm-4">
-                    Nesumokėtų sąskaitų: 0
-                </div>
-            </div>
-            <br />
-            Ar tikrai norite panaikinti paskyrą?
-            <input type="button" class="btn btn-danger" value="Taip" />
-            <input type="button" class="btn btn-light" value="Ne" />
-        </div>
+        }
     </center>
 </div>

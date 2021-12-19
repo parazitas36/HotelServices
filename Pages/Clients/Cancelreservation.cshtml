@@ -1,5 +1,6 @@
-﻿@page
+﻿@page "{id}/{handler?}"
 @model CancelReservationModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers 
 @{
     ViewData["Title"] = "Rezervacijos atšaukimas";
 }
@@ -12,25 +13,32 @@
     <h1 class="display-4">Rezervacijos atšaukimas</h1>
     <h3>Jūsų rezervacijos duomenys</h3>
     <center>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-sm-4">
+        @if (Model.reservation != null)
+        {
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4">
+                    </div>
+                    <div class="col-sm-4">
+                        Rezervuotas kambarys: @Model.reservation.RoomNumber
+                    </div>
                 </div>
-                <div class="col-sm-4">
-                    Rezervuotas kambarys: 201
+                <div class="row">
+                    <div class="col-sm-4">
+                    </div>
+                    <div class="col-sm-4">
+                        Data: @Model.reservation.Starts.ToString("yyyy/MM/dd") - @Model.reservation.Ends.ToString("yyyy/MM/dd")
+                    </div>
                 </div>
+                <br />
+                Ar tikrai norite atšaukti rezervaciją?
+                <a asp-area="" asp-page="/Clients/Cancelreservation" asp-page-handler="OnClick" asp-route-ID="@Model.resID" class="btn btn-danger">Taip</a>
+                <a asp-area="" asp-page="/Clients/Reservations"><input type="button" class="btn btn-light" value="Ne" /></a>
             </div>
-            <div class="row">
-                <div class="col-sm-4">
-                </div>
-                <div class="col-sm-4">
-                    Data: 2021/11/25 - 2021/12/01
-                </div>
-            </div>
-            <br />
-            Ar tikrai norite atšaukti rezervaciją?
-            <input type="button" class="btn btn-danger" value="Taip" />
-            <input type="button" class="btn btn-light" value="Ne" />
-        </div>
+        }
+        else
+        {
+            <h3>Tokio rezervacijos nebėra.</h3>
+        }
     </center>
 </div>

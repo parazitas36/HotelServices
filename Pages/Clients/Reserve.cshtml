@@ -13,18 +13,16 @@
     <center>
         <form method="post" style="width:50%;">
             <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <label for="room">Kambario numeris:</label>
-                        <input type="number" name="room" />
-                    </div>
+                <h5>Pasirinkite laiką, kurį norite rezervuoti</h5>
+                <h5 style="color:red">@Model.ERROR</h5>
+                <div class>
                     <div class="col-sm-4">
                         <label for="datefrom">Nuo:</label>
-                        <input type="date" name="datefrom" />
+                        <input type="date" name="start" required />
                     </div>
                     <div class="col-sm-4">
                         <label for="datetill">Iki:</label>
-                        <input type="date" name="datetill" />
+                        <input type="date" name="end" required />
                     </div>
                 </div>
                 <input type="submit" value="Rezervuoti" name="submit" />
