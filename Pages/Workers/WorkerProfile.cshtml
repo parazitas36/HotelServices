@@ -6,29 +6,43 @@
 @{
     Layout = "_LayoutWorker";
 }
+@{
+    Model.GetWorker();
+}
+
 <div class="text-center">
     <h1 class="display-4">Profilis</h1>
     <center>
         <div style="border-style:double; width:50%; margin-top:10%; background-color: whitesmoke">
-          
+
             <form style="margin-left:35%;" method="post">
 
                 <div class="row">
                     <div class="col-sm-4">
                     </div>
                     <div class="col-sm-4">
-                        Jūsų prisijungimo vardas
+                        @Model.work[0].Name
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
                     </div>
                     <div class="col-sm-4">
-                        Email
+                        @Model.work[0].Surname
                     </div>
                 </div>
-                <a href="WorkerProfileEdit"><input type="button" value="Redaguoti" /></a>
-                <br />
+                <div class="row">
+                    <div class="col-sm-4">
+                    </div>
+                    <div class="col-sm-4">
+                        @Model.work[0].Birth
+                    </div>
+                </div>
+                <center>
+                    <a asp-page="./Atvykimas" asp-route-id="2" onclick="return confirm('Ar fiksuoti?')" class="btn btn-warning">Atvykimas </a>
+                    <a asp-page="./Isvykimas" asp-route-id="2" onclick="return confirm('Ar fiksuoti?')" class="btn btn-warning">Isvykimas </a>
+                    <br />
+                </center>
             </form>
         </div>
     </center>

@@ -1,4 +1,4 @@
-using HotelServices.Controllers;
+﻿using HotelServices.Controllers;
 using HotelServices.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,18 +10,16 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-
-
 namespace HotelServices.Pages
 {
-    public class WorkerProfileModel : PageModel
+    public class WorkerlistModel : PageModel
     {
-        private readonly ILogger<WorkerProfileModel> _logger;
+        private readonly ILogger<WorkerlistModel> _logger;
         private readonly IConfiguration _config;
         public SqlConnection dbc;
         public IList<Darbuotojas> work;
-
-        public WorkerProfileModel(ILogger<WorkerProfileModel> logger, IConfiguration config)
+        public IList<int> ids;
+        public WorkerlistModel(ILogger<WorkerlistModel> logger, IConfiguration config)
         {
             _logger = logger;
             _config = config;
@@ -32,8 +30,9 @@ namespace HotelServices.Pages
         public void GetWorker()
         {
             work = new List<Darbuotojas>();
+            ids = new List<int>();
             string query = @"
-            SELECT t1.vardas, t1.pavarde, t1.gimimo_data
+            SELECT t1.vardas, t1.pavarde, t1.gimimo_data,t1.id_Naudotojas
             FROM Darbuotojas t1   
             ";
             SqlCommand cmd = new SqlCommand(query, dbc);
@@ -50,6 +49,7 @@ namespace HotelServices.Pages
                         (DateTime)results[2]
                     );
                     work.Add(reservation);
+                    ids.Add((int)results[3]);
                 }
                 reader.Close();
             }

@@ -1,0 +1,19 @@
+﻿@page
+@model IsvykimasModel
+@{
+    ViewData["Title"] = "Isvykimas registruotas";
+}
+@{
+    Layout = "_LayoutWorker";
+}
+@{
+    <div class="text-center">
+        <h1 class="display-4">Darbas pabaigtas</h1>
+        <center>
+            <form method="POST">
+                <button type="submit" asp-route-data="foo" asp-page-handler="Way2">Atgal</button>
+            </form>
+        </center>
+    </div>
+
+}

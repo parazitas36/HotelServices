@@ -8,6 +8,13 @@ namespace HotelServices.Data
     public class Kambarys
     {
         public int Nr { get; set; }
-        public string Statusas { get; set; }
+        public int Statusas { get; set; }
+
+        public Kambarys(int nr, int surname)
+        {
+            Nr = nr;
+            Statusas = surname;
+        }
     }
+
 }

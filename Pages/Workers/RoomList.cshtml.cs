@@ -11,17 +11,16 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
-
-namespace HotelServices.Pages
+namespace HotelServices.Pages.Workers
 {
-    public class WorkerProfileModel : PageModel
+    public class RoomListModel : PageModel
     {
-        private readonly ILogger<WorkerProfileModel> _logger;
+        private readonly ILogger<RoomListModel> _logger;
         private readonly IConfiguration _config;
         public SqlConnection dbc;
-        public IList<Darbuotojas> work;
+        public IList<Kambarys> work;
 
-        public WorkerProfileModel(ILogger<WorkerProfileModel> logger, IConfiguration config)
+        public RoomListModel(ILogger<RoomListModel> logger, IConfiguration config)
         {
             _logger = logger;
             _config = config;
@@ -29,12 +28,13 @@ namespace HotelServices.Pages
             DBController db = new DBController(config);
             dbc = db.ConnectToDB();
         }
-        public void GetWorker()
+
+        public void GetWork()
         {
-            work = new List<Darbuotojas>();
+            work = new List<Kambarys>();
             string query = @"
-            SELECT t1.vardas, t1.pavarde, t1.gimimo_data
-            FROM Darbuotojas t1   
+            SELECT t1.nr, t1.statusas
+            FROM Kambarys t1    
             ";
             SqlCommand cmd = new SqlCommand(query, dbc);
             SqlDataReader reader = cmd.ExecuteReader();
@@ -43,11 +43,10 @@ namespace HotelServices.Pages
                 while (reader.Read())
                 {
                     IDataRecord results = (IDataRecord)reader;
-                    Darbuotojas reservation = new Darbuotojas
+                    Kambarys reservation = new Kambarys
                     (
-                        (string)results[0],
-                        (string)results[1],
-                        (DateTime)results[2]
+                        (int)results[0],
+                        (int)results[1]
                     );
                     work.Add(reservation);
                 }

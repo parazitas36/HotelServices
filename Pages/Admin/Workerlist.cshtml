@@ -1,0 +1,53 @@
+﻿@page
+@model WorkerlistModel
+@{
+    ViewData["Title"] = "Darbininkai";
+}
+@{
+    Layout = "_Layoutadmin";
+}
+@{
+    Model.GetWorker();
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Darbuotojų sąrašas</h1>
+    <center>
+        <table class="table-striped" style="width:80%; justify-content:center; text-align:center;">
+            <thead>
+                <tr>
+                    <th>Nr.</th>
+                    <th>Vardas</th>
+                    <th>Pavarde</th>
+                    <th>Gimimo data</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @{
+                    if (Model.work.Count == 0)
+                    {
+                        <tr><td colspan="5">Neturite rezervacijų</td></tr>
+                    }
+                }
+                @{
+                    for (int i = 0; i < Model.work.Count; i++)
+                    {
+                        <tr>
+                            <td>@Model.ids[i]</td>
+                            <td>@Model.work[i].Name</td>
+                            <td>@Model.work[i].Surname</td>
+                            <td>@Model.work[i].Birth</td>
+                            <td>
+
+                                <a asp-page="./WorkerProfileEdit" asp-route-id="@Model.ids[i]" onclick="return confirm('Ar tikrai norite redaguoti?')" class="btn btn-warning">Redaguot </a>
+                                <a asp-page="./Summary" asp-route-id="@Model.ids[i]" onclick="return confirm('Ar tikrai uzbaigtas darbas?')" class="btn btn-warning">Ataskaita </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </center>
+</div>

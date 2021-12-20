@@ -115,7 +115,35 @@ namespace HotelServices.Pages
                 //sukuria cookie uz "role" kablelio galima rasyti ir nehardcodintas reiksmes pvz jwt tokena
 
                 Response.Cookies.Append("role", "rworker");
-                return Redirect("/registration/index");
+                return Redirect("/registration/index");               
+            }
+            if (role == "worker")
+            {
+                query = @"
+                SELECT *
+                FROM Darbuotojas
+                WHERE id_Naudotojas = @id;
+                ";
+                cmd = new SqlCommand(query, dbc);
+                cmd.Parameters.AddWithValue("@id", id);
+                reader = cmd.ExecuteReader();
+                reader.Read();
+                IDataRecord clientData = (IDataRecord)reader;
+
+                Console.WriteLine("Client logged in.");
+                Darbuotojas client = new Darbuotojas
+                (
+
+                    (string)clientData[0],
+                    (string)clientData[1],
+                    (DateTime)clientData[2]
+                );
+                Console.WriteLine(client);
+                reader.Close();
+
+                //sukuria cookie uz "role" kablelio galima rasyti ir nehardcodintas reiksmes pvz jwt tokena
+
+                Response.Cookies.Append("role", "worker");
                 return Redirect("/registration/index");
             }
             dbc.Close();

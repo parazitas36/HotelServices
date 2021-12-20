@@ -1,0 +1,45 @@
+﻿@page
+@model SummaryModel
+@{
+    ViewData["Title"] = "Atlikti darbai laikotarpi";
+}
+@{
+    Layout = "_LayoutWorker";
+}
+<div class="text-center">
+    <h1 class="display-4">Darbuotojų sąrašas</h1>
+    <center>
+        <form method="post">
+            Nuo: <input type="datetime" name="startdate" />
+            Iki: <input type="datetime" name="enddate" />
+            <input type="submit" value="Submit" class="btn btn-success" />
+            <a asp-page="Summary">Visi</a>
+            <table class="table-striped" style="width:80%; justify-content:center; text-align:center;">
+                <thead>
+                    <tr>
+                        <th>Pavadinimas</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @{
+                        if (Model.results.Count == 0)
+                        {
+                            <tr><td colspan="5">Neturite rezervacijų</td></tr>
+                        }
+                    }
+                    @{
+                        for (int i = 0; i < Model.results.Count; i++)
+                        {
+                            <tr>
+                                <td>@Model.results.ElementAt(i).Name</td>
+                                <td>@Model.results.ElementAt(i).date</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </form>
+    </center>
+</div>
